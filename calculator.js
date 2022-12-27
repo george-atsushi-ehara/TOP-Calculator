@@ -27,21 +27,15 @@ function plusOp(num1, num2) {
 }
 function minusOp(num1, num2) {
   equal = num1 - num2;
-  userInput.textContent = ""
-  inputValue = ""
 }
 function mulOp(num1, num2) {
   equal = num1 * num2;
-  userInput.textContent = ""
-  inputValue = ""
 }
 function divOp(num1, num2) {
   if (num2 == 0) {
     return "ERR";
   } else {
     equal = num1 / num2;
-    userInput.textContent = ""
-    inputValue = ""
   }
 }
 
@@ -75,3 +69,11 @@ function operate() {
   inputValue = "";
   userInput.textContent = "";
 }
+
+operatorButton.forEach((operator) => {
+  operator.addEventListener('click', () => {
+    operater.operator.textContent;
+    operate();
+  }
+  )
+})
