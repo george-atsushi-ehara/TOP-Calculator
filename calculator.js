@@ -70,10 +70,11 @@ function operate() {
   userInput.textContent = "";
 }
 
+equalButton.addEventListener('click', operate);
+
 operatorButton.forEach((operator) => {
   operator.addEventListener('click', () => {
     operater.operator.textContent;
     operate();
-  }
-  )
+  })
 })
