@@ -1,30 +1,49 @@
-const body = document.body;
-const calculatorContainer = document.getElementById("calculatorContainer");
+let inputValue = "";
+let totalValue = "";
+let operater = "";
+
 const userInput = document.getElementById("input");
+const total = document.getElementById("total");
 
+const operatorButton = document.querySelectorAll(".operator");
 const numberButton = document.querySelectorAll(".numberBtn");
+const equalButton = document.querySelector(".equal");
+const decimalButton = document.querySelector(".decimal");
+const clearButton = document.querySelector(".clear");
 
-numberButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    userInput.textContent += button.textContent;
-  })
-})
+// Click on Number Button and it will show up on input display
+// inputValue = Stored Value
 
-
+numberButton.forEach((number) => {
+  number.addEventListener("click", () => {
+    inputValue += number.textContent;
+    userInput.textContent = inputValue;
+  });
+});
+// Operators
 let equal = 0;
 function plusOp(num1, num2) {
   equal = num1 + num2;
-  return equal;
 }
 function minusOp(num1, num2) {
   equal = num1 - num2;
-  return equal;
 }
 function mulOp(num1, num2) {
   equal = num1 * num2;
-  return equal;
 }
 function divOp(num1, num2) {
-  equal = num1 / num2;
-  return equal;
+  if (num2 == 0) {
+    return "ERR";
+  } else {
+    equal = num1 / num2;
+  }
 }
+
+// Clear
+clearButton.addEventListener("click", () => {
+  inputValue = "";
+  userInput.textContent = "";
+  total.textContent = 0;
+});
+
+function operate(num1, num2) { }
