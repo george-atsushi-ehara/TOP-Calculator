@@ -16,6 +16,9 @@ const clearButton = document.querySelector(".clear");
 // inputValue = Stored Value
 numberButton.forEach((number) => {
   number.addEventListener("click", () => {
+    if (total.textContent !== "0" && operater === "") {
+      total.textContent = 0;
+    }
     inputValue += number.textContent;
     userInput.textContent = inputValue;
   });
@@ -52,6 +55,8 @@ function operate() {
     total.textContent = inputValue;
     inputValue = "";
     userInput.textContent = "";
+  } else if (inputValue === "") {
+    return
   } else {
     num1 = Number(total.textContent)
     num2 = Number(inputValue)
@@ -69,6 +74,8 @@ function operate() {
       case '÷':
         divOp(num1, num2);
         break;
+      case '':
+        break
     }
     total.textContent = equal;
     inputValue = "";
@@ -85,4 +92,5 @@ operatorButton.forEach((operator) => {
 
 equalButton.addEventListener('click', () => {
   operate();
+  operater = "";
 });
