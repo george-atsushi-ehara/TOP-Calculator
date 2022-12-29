@@ -1,6 +1,7 @@
 let inputValue = "";
-let totalValue = "";
 let operater = "";
+let num1 = 0;
+let num2 = 0;
 
 const userInput = document.getElementById("input");
 const total = document.getElementById("total");
@@ -47,34 +48,41 @@ clearButton.addEventListener("click", () => {
 });
 
 function operate() {
-  let num1 = parseFloat(total.textContent);
-  let num2 = parseFloat(inputValue);
+  if (total.textContent === "0") {
+    total.textContent = inputValue;
+    inputValue = "";
+    userInput.textContent = "";
+  } else {
+    num1 = Number(total.textContent)
+    num2 = Number(inputValue)
 
-  switch (operater) {
-    case '+':
-      plusOp(num1, num2);
-      break;
-    case '-':
-      minusOp(num1, num2);
-      break;
-    case '×':
-      mulOp(num1, num2);
-      break;
-    case '÷':
-      divOp(num1, num2);
-      break;
+    switch (operater) {
+      case '+':
+        plusOp(num1, num2);
+        break;
+      case '-':
+        minusOp(num1, num2);
+        break;
+      case '×':
+        mulOp(num1, num2);
+        break;
+      case '÷':
+        divOp(num1, num2);
+        break;
+    }
+    total.textContent = equal;
+    inputValue = "";
+    userInput.textContent = "";
   }
-
-  total.textContent = equal;
-  inputValue = "";
-  userInput.textContent = "";
 }
-
-equalButton.addEventListener('click', operate);
 
 operatorButton.forEach((operator) => {
   operator.addEventListener('click', () => {
-    operater.operator.textContent;
+    operater = operator.textContent;
     operate();
   })
 })
+
+equalButton.addEventListener('click', () => {
+  operate();
+});
