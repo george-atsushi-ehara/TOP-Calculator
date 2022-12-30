@@ -56,16 +56,17 @@ function operate() {
     } else if (operater === "×") {
       totalValue *= inputValue;
     } else if (operater === "÷") {
-      if (userInput == 0) {
+      if (inputValue == 0) {
         total.textContent = "ERR";
       } else {
         totalValue /= inputValue;
       }
     }
     totalValue = totalValue.toString();
-    totalDisplay.textContent = totalValue + " " + operater;
+    totalDisplay.textContent = totalValue;
     userInputDisplay.textContent = "";
     inputValue = "";
+    operater = "";
   }
 }
 
