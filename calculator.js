@@ -1,10 +1,11 @@
 let inputValue = "";
+let totalValue = "";
 let operater = "";
 let num1 = 0;
 let num2 = 0;
 
-const userInput = document.getElementById("input");
-const total = document.getElementById("total");
+const userInputDisplay = document.getElementById("input");
+const totalDisplay = document.getElementById("total");
 
 const numberButton = document.querySelectorAll(".numberBtn");
 const operatorButton = document.querySelectorAll(".operator");
@@ -16,81 +17,56 @@ const clearButton = document.querySelector(".clear");
 // inputValue = Stored Value
 numberButton.forEach((number) => {
   number.addEventListener("click", () => {
-    if (total.textContent !== "0" && operater === "") {
-      total.textContent = 0;
+    if (totalDisplay.textContent !== "0" && operater === "") {
+      totalDisplay.textContent = 0;
     }
-    inputValue += number.textContent;
-    userInput.textContent = inputValue;
+    if (inputValue.length <= 11) {
+      inputValue += number.textContent;
+      userInputDisplay.textContent = inputValue;
+    }
   });
 });
-
-// Operators
-let equal = 0;
-function plusOp(num1, num2) {
-  equal = num1 + num2;
-}
-function minusOp(num1, num2) {
-  equal = num1 - num2;
-}
-function mulOp(num1, num2) {
-  equal = num1 * num2;
-}
-function divOp(num1, num2) {
-  if (num2 == 0) {
-    return "ERR";
-  } else {
-    equal = num1 / num2;
-  }
-}
-
-// Clear
-clearButton.addEventListener("click", () => {
-  inputValue = "";
-  userInput.textContent = "";
-  total.textContent = 0;
-});
-
-function operate() {
-  if (total.textContent === "0") {
-    total.textContent = inputValue;
-    inputValue = "";
-    userInput.textContent = "";
-  } else if (inputValue === "") {
-    return
-  } else {
-    num1 = Number(total.textContent)
-    num2 = Number(inputValue)
-
-    switch (operater) {
-      case '+':
-        plusOp(num1, num2);
-        break;
-      case '-':
-        minusOp(num1, num2);
-        break;
-      case '×':
-        mulOp(num1, num2);
-        break;
-      case '÷':
-        divOp(num1, num2);
-        break;
-      case '':
-        break
-    }
-    total.textContent = equal;
-    inputValue = "";
-    userInput.textContent = "";
-  }
-}
 
 operatorButton.forEach((operator) => {
   operator.addEventListener('click', () => {
     operater = operator.textContent;
-    operate();
+    totalValue = inputValue;
+    totalDisplay.textContent = totalValue + " " + operater;
+    inputValue = "";
+    userInputDisplay.textContent = "";
   })
 })
 
-equalButton.addEventListener('click', () => {
-  operate();
-  operater = "";
+// Clear
+clearButton.addEventListener("click", () => {
+  inputValue = "";
+  userInputDisplay.textContent = "";
+  total.textContent = 0;
 });
+
+function operate() {
+  if (operater) {
+    inputValue = Number(inputValue);
+    totalValue = Number(totalValue);
+
+    if (operater === "+") {
+      totalValue += inputValue;
+    } else if (operater === "-") {
+      totalValue -= inputValue;
+    } else if (operater === "×") {
+      totalValue *= inputValue;
+    } else if (operater === "÷") {
+      if (userInput == 0) {
+        total.textContent = "ERR";
+      } else {
+        totalValue /= inputValue;
+      }
+    }
+    totalValue = totalValue.toString();
+    totalDisplay.textContent = totalValue + " " + operater;
+    userInputDisplay.textContent = "";
+    inputValue = "";
+  }
+}
+
+equalButton.addEventListener('click', operate);
